@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Figtree, Syne } from "next/font/google";
+import { KADAM_DIRECT_LINK } from "@/lib/ads";
 import "./globals.css";
 
 const syne = Syne({
@@ -45,7 +46,6 @@ export const metadata: Metadata = {
     follow: true,
   },
   other: {
-    // Placeholder hooks for future ad / analytics script configuration
     "ad-slot-ready": "true",
     "ad-sizes": "728x90,300x250,320x50",
   },
@@ -60,14 +60,14 @@ export default function RootLayout({
     <html lang="en" className={`${syne.variable} ${figtree.variable}`}>
       <head>
         {/*
-          Inject ad / analytics scripts here later, e.g.:
-          <Script src="https://.../ads.js" strategy="afterInteractive" />
-          Target containers: #ad-leaderboard-top, #ad-sidebar-primary,
-          #ad-sidebar-secondary, #ad-native-mid, #ad-mobile-banner,
-          #ad-leaderboard-bottom
+          Kadam.net Direct Link is exposed as a meta tag and wired into AdSlot
+          click targets. Banner script containers remain:
+          #ad-leaderboard-top, #ad-sidebar-primary, #ad-sidebar-secondary,
+          #ad-native-mid, #ad-mobile-banner, #ad-leaderboard-bottom
         */}
         <meta name="theme-color" content="#071018" />
         <meta name="application-name" content="AestheticHub" />
+        <meta name="kadam-direct-link" content={KADAM_DIRECT_LINK} />
         <meta name="ad-container-ids" content="ad-leaderboard-top,ad-sidebar-primary,ad-sidebar-secondary,ad-native-mid,ad-mobile-banner,ad-leaderboard-bottom" />
       </head>
       <body className="font-body antialiased">

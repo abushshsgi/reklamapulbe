@@ -205,8 +205,7 @@ export function HomePage() {
             AestheticHub — bio tools for the feed era
           </p>
           <p className="text-xs text-mist">
-            Ad slots use standard sizes (728×90, 300×250, 320×50) for clean
-            script injection.
+            Ad slots monetize via Kadam Direct Link (728×90, 300×250, 320×50).
           </p>
         </div>
       </footer>

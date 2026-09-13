@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { KADAM_DIRECT_LINK } from "@/lib/ads";
 
 type AdSize = "728x90" | "300x250" | "320x50";
 
@@ -17,8 +18,8 @@ interface AdSlotProps {
 }
 
 /**
- * Standard ad placeholder containers.
- * Inject scripts later via layout <head> / Script tags targeting these IDs.
+ * Standard ad containers. Default click-through uses the Kadam.net Direct Link
+ * from layout meta `kadam-direct-link` (blockID=451608).
  */
 export function AdSlot({
   size,
@@ -32,23 +33,27 @@ export function AdSlot({
       id={id}
       data-ad-slot
       data-ad-size={size}
+      data-ad-href={KADAM_DIRECT_LINK}
       aria-label={label}
       className={`relative mx-auto overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] ${sizeStyles[size]} ${className}`}
     >
       <div className="ad-shimmer absolute inset-0 pointer-events-none" />
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-1 px-3 text-center">
+      <a
+        href={KADAM_DIRECT_LINK}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-1 px-3 text-center transition hover:bg-white/[0.04]"
+      >
         {children ?? (
           <>
             <span className="text-[10px] uppercase tracking-[0.22em] text-mist/70">
               {label}
             </span>
             <span className="font-display text-sm text-sand/80">{size}</span>
-            <span className="text-[11px] text-mist/50">
-              Ready for script injection
-            </span>
+            <span className="text-[11px] text-mist/50">Sponsored</span>
           </>
         )}
-      </div>
+      </a>
     </aside>
   );
 }
