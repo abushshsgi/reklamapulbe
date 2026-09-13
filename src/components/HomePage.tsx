@@ -138,11 +138,21 @@ export function HomePage() {
         </section>
 
         <div className="mb-8 animate-rise [animation-delay:80ms]">
-          <AdSlot id="ad-leaderboard-top" size="728x90" label="Top Leaderboard" />
+          <AdSlot
+            id="ad-leaderboard-top"
+            size="728x90"
+            theme="gadgets"
+            label="Gadgets Sale"
+          />
         </div>
 
         <div className="mb-6 flex justify-center md:hidden">
-          <AdSlot id="ad-mobile-banner" size="320x50" label="Mobile Banner" />
+          <AdSlot
+            id="ad-mobile-banner"
+            size="320x50"
+            theme="super-price"
+            label="Super Price"
+          />
         </div>
 
         <div
@@ -158,7 +168,8 @@ export function HomePage() {
               <AdSlot
                 id="ad-native-mid"
                 size="300x250"
-                label="Native Mid Placement"
+                theme="fashion"
+                label="Trending Fashion"
               />
             </div>
 
@@ -172,7 +183,12 @@ export function HomePage() {
           </div>
 
           <aside className="hidden space-y-4 xl:sticky xl:top-24 xl:block">
-            <AdSlot id="ad-sidebar-primary" size="300x250" label="Sidebar Ad" />
+            <AdSlot
+              id="ad-sidebar-primary"
+              size="300x250"
+              theme="gadgets"
+              label="Gadgets Sale"
+            />
             <div className="glass rounded-2xl p-4">
               <p className="mb-2 text-xs uppercase tracking-[0.18em] text-mist/70">
                 Creator tip
@@ -185,7 +201,8 @@ export function HomePage() {
             <AdSlot
               id="ad-sidebar-secondary"
               size="300x250"
-              label="Sidebar Secondary"
+              theme="super-price"
+              label="Super Price Deals"
             />
           </aside>
         </div>
@@ -194,7 +211,8 @@ export function HomePage() {
           <AdSlot
             id="ad-leaderboard-bottom"
             size="728x90"
-            label="Bottom Leaderboard"
+            theme="fashion"
+            label="Trending Fashion"
           />
         </div>
       </main>

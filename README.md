@@ -33,4 +33,6 @@ Placeholders live in the page with IDs:
 - `#ad-sidebar-primary` / `#ad-sidebar-secondary` / `#ad-native-mid` — 300×250
 - `#ad-mobile-banner` — 320×50
 
-Inject scripts via `src/app/layout.tsx` `<head>` (or Next.js `Script`) targeting those IDs.
+Slots render AliExpress-style creatives from `public/banners/` (gadgets, super-price, fashion)
+and click through to the Kadam Direct Link in `src/lib/ads.ts`. Prompt text lives in
+`public/banners/PROMPTS.md`.

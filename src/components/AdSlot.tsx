@@ -1,7 +1,10 @@
 import type { ReactNode } from "react";
-import { KADAM_DIRECT_LINK } from "@/lib/ads";
-
-type AdSize = "728x90" | "300x250" | "320x50";
+import {
+  BANNER_IMAGES,
+  KADAM_DIRECT_LINK,
+  type AdSize,
+  type BannerTheme,
+} from "@/lib/ads";
 
 const sizeStyles: Record<AdSize, string> = {
   "728x90": "w-full max-w-[728px] h-[90px]",
@@ -11,6 +14,10 @@ const sizeStyles: Record<AdSize, string> = {
 
 interface AdSlotProps {
   size: AdSize;
+  /** Prefer a generated AliExpress-style creative theme when set. */
+  theme?: BannerTheme;
+  imageSrc?: string;
+  imageAlt?: string;
   label?: string;
   className?: string;
   id?: string;
@@ -23,36 +30,56 @@ interface AdSlotProps {
  */
 export function AdSlot({
   size,
+  theme,
+  imageSrc,
+  imageAlt,
   label = "Advertisement",
   className = "",
   id,
   children,
 }: AdSlotProps) {
+  const creative = theme ? BANNER_IMAGES[theme][size] : undefined;
+  const src = imageSrc ?? creative?.src;
+  const alt = imageAlt ?? creative?.alt ?? label;
+
   return (
     <aside
       id={id}
       data-ad-slot
       data-ad-size={size}
+      data-ad-theme={theme}
       data-ad-href={KADAM_DIRECT_LINK}
       aria-label={label}
       className={`relative mx-auto overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] ${sizeStyles[size]} ${className}`}
     >
-      <div className="ad-shimmer absolute inset-0 pointer-events-none" />
+      {!src && <div className="ad-shimmer absolute inset-0 pointer-events-none" />}
       <a
         href={KADAM_DIRECT_LINK}
         target="_blank"
         rel="noopener noreferrer sponsored"
-        className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-1 px-3 text-center transition hover:bg-white/[0.04]"
+        className="relative z-10 block h-full w-full transition hover:opacity-95"
       >
-        {children ?? (
-          <>
-            <span className="text-[10px] uppercase tracking-[0.22em] text-mist/70">
-              {label}
+        {children ??
+          (src ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={src}
+              alt={alt}
+              width={Number(size.split("x")[0])}
+              height={Number(size.split("x")[1])}
+              className="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <span className="flex h-full w-full flex-col items-center justify-center gap-1 px-3 text-center">
+              <span className="text-[10px] uppercase tracking-[0.22em] text-mist/70">
+                {label}
+              </span>
+              <span className="font-display text-sm text-sand/80">{size}</span>
+              <span className="text-[11px] text-mist/50">Sponsored</span>
             </span>
-            <span className="font-display text-sm text-sand/80">{size}</span>
-            <span className="text-[11px] text-mist/50">Sponsored</span>
-          </>
-        )}
+          ))}
       </a>
     </aside>
   );
